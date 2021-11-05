@@ -15,6 +15,12 @@ class CreateMoviesTable extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
+            $table->string('genre');
+            $table->string('title');
+            $table->double('rating', 8, 1);
+            $table->text('description')->nullable();
+            $table->smallInteger('year');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
