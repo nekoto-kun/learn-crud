@@ -38,6 +38,10 @@
         </ul>
         </p>
         <hr>
+        <div class="text-center">
+            <img src="{{ Storage::url($movie->image) }}" class="img-fluid rounded text-center">
+        </div>
+        <hr>
         <p class="lead">{{ $movie->description }}</p>
     </div>
 @endsection
