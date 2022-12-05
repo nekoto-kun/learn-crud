@@ -79,7 +79,7 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        return view('movies.edit', compact('movie'));
     }
 
     /**
@@ -91,7 +91,19 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        $rules = [
+            'title' => 'required|max:255',
+            'genre' => 'required|max:100',
+            'description' => '',
+            'year' => 'required|integer|min:1900|max:2099',
+            'rating' => 'required|numeric|min:0|max:5'
+        ];
+
+        $validated = $request->validate($rules);
+
+        $movie->update($validated);
+        $request->session()->flash('success', "Berhasil memperbarui data film {$validated['title']}.");
+        return redirect()->route('movies.index');
     }
 
     /**
@@ -102,6 +114,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return redirect()->route('movies.index')->with('success', "Data film {$movie['title']} sudah dihapus.");
     }
 }
