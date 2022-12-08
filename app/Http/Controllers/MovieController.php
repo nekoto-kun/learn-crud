@@ -46,17 +46,9 @@ class MovieController extends Controller
 
         $validated = $request->validate($rules);
 
-        // $newMovie = new Movie();
-        // $newMovie->title = $validated['title'];
-        // $newMovie->genre = $validated['genre'];
-        // $newMovie->description = $validated['description'];
-        // $newMovie->year = $validated['year'];
-        // $newMovie->rating = $validated['rating'];
-        // $newMovie->save();
-
         Movie::create($validated);
 
-        $request->session()->flash('success', "Film yang berjudul {$validated['title']} sudah berhasil ditambahkan.");
+        $request->session()->flash('success', "Berhasil menambahkan film baru yang berjudul {$validated['title']}");
         return redirect()->route('movies.index');
     }
 
@@ -102,7 +94,8 @@ class MovieController extends Controller
         $validated = $request->validate($rules);
 
         $movie->update($validated);
-        $request->session()->flash('success', "Berhasil memperbarui data film {$validated['title']}.");
+
+        $request->session()->flash('success', "Berhasil memperbarui data film yang berjudul {$validated['title']}");
         return redirect()->route('movies.index');
     }
 
@@ -115,6 +108,6 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         $movie->delete();
-        return redirect()->route('movies.index')->with('success', "Data film {$movie['title']} sudah dihapus.");
+        return redirect()->route('movies.index')->with('success', "Berhasil menghapus data film {$movie['title']}");
     }
 }

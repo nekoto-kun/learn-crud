@@ -7,7 +7,6 @@
     <form action="{{ route('movies.update', ['movie' => $movie->id]) }}" method="POST">
         @method('PATCH')
         @csrf
-
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="title">Title</label>
