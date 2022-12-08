@@ -4,7 +4,24 @@
 
 @section('content')
     <div class="col-md-12">
-        <h2>{{ $movie->title }}</h2>
+        <div class="row">
+            <div class="col-8">
+                <h2>{{ $movie->title }}</h2>
+            </div>
+            <div class="col-4">
+                <div class="float-right">
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-primary ml-3">Edit</a>
+
+                        <form action={{ route('movies.destroy', $movie->id) }} method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger ml-3">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <h5>
             <span class="badge badge-primary">
                 <i class="fa fa-star fa-fw"></i>
